@@ -72,6 +72,8 @@ class PostController extends Controller
      */
     public function update(UpdatePostRequest $request, $id)
     {   
+        $validatedData = $request->validated();
+        
         $post = Post::findOrFail($id);
         $post = $this->postService->updatePost($post, $validatedData );
         return (new PostResource($post))
