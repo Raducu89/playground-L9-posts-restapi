@@ -43,10 +43,6 @@ class PostController extends Controller
     {
         $validatedData = $request->validated();
 
-        if (isset($validatedData['published_at'])) {
-            $validatedData['published_at'] = Carbon::parse($validatedData['published_at']);
-        }
-
         $post = $this->postService->createPost($validatedData);
         return (new PostResource($post))
             ->additional(['message' => 'Post created successfully'], 201);
@@ -73,7 +69,7 @@ class PostController extends Controller
     public function update(UpdatePostRequest $request, $id)
     {   
         $validatedData = $request->validated();
-        
+
         $post = Post::findOrFail($id);
         $post = $this->postService->updatePost($post, $validatedData );
         return (new PostResource($post))

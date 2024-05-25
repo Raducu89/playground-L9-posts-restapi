@@ -14,4 +14,9 @@ class Post extends Model
         'body',
         'published_at'
     ];
+
+    public function setPublishedAtAttribute($value)
+    {
+        $this->attributes['published_at'] = $value ? now() : null;   
+    }
 }
